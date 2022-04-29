@@ -54,10 +54,10 @@ $aProductos[] = array(
     "precio" => 45000
 );
 
-function contar($aArray,){
+function contar($aArray){
     $cont = 0;
     foreach($aArray as $item){
-        $cont++;
+        $cont++; //$cont=$cont + 1;
 
     }
     return $cont;

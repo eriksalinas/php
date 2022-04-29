@@ -50,27 +50,29 @@ $aPacientes[] = array(
 <body>
     <main class="container">
         <div class="row">
-            <div class="col-12 ">
+            <div class="col-12 text-center p-5">
                 <h1>Lista de pacientes</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table table-hover  ">
+                <table class="table table-hover border ">
+                    <thead>
                     <tr>
                         <th>DNI</th>
                         <th>Nombre y apellido</th>
                         <th>Edad</th>
                         <th>Peso</th>
                     </tr>
-
-
+                    </thead>
+                    <tbody>
                     <?php foreach ($aPacientes as $pos => $paciente) { //empieza el nucle{
 
                         //foreach es el bucle, hay otro tipod de bucles
 
 
                     ?>
+                    
                         <tr>
                             <td><?php echo $paciente["dni"]; ?></td>
                             <td><?php echo $paciente["nombre"]; ?></td>
@@ -79,6 +81,7 @@ $aPacientes[] = array(
                         </tr>
                     <?php }  //termina el bucle }
                     ?>
+                    </tbody>
                 </table>
             </div>
         </div>
