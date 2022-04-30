@@ -55,12 +55,12 @@ $aProductos[] = array(
 );
 
 function contar($aArray){
-    $cont = 0;
+    $contar = 0;
     foreach($aArray as $item){
-        $cont++; //$cont=$cont + 1;
+        $contar=$contar + 1; //$cont=$cont + 1;
 
     }
-    return $cont;
+    return $contar;
 }
 $aNotas = array(9,8,9.50,4,7,8);
 echo "Cantida de productos:" .contar($aProductos) . "<br>";
