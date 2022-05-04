@@ -45,8 +45,8 @@ function promediar($aNumeros){
                         $promedioCursada=0;
                         $sumatoria=0;
                         foreach($aAlumnos as $alumno){
-                            $promerio= promediar($alumno["notas"]);
-                            $sumatoria=$sumatoria+$promerio;
+                            $promedio= promediar($alumno["notas"]);
+                            $sumatoria=$sumatoria+$promedio;
                             
                         
                     ?>
