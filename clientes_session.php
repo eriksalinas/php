@@ -5,7 +5,11 @@ error_reporting(E_ALL);
 
 session_start(); //Indica que utilizamos variables de session
 
+if(!isset($_SESSION["listadoClientes"])){
+    $_SESSION["listadoClientes"] = array();
+}
 if($_POST){
+
 
     if(isset($_POST["btnEnviar"])){ //isset es existe? empieza bucle
 
@@ -27,8 +31,8 @@ if($_POST){
         session_destroy();
         header("Location: clientes_session.php");
     }
-}
-//unset($_SESSION)["istadoClientes"][0]; //ELIMINA VARIABLES
+} 
+//unset($_SESSION)["listadoClientes"][1]; //ELIMINA VARIABLES
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -84,8 +88,7 @@ if($_POST){
                     <tbody>
 
                         <?php 
-                        foreach($_SESSION ["listadoClientes"] as $cliente){
-                           
+                             foreach( $_SESSION["listadoClientes"]as $item){
                         ?>
                         <tr>
                             <td>  <?php echo $cliente ["nombre"];?></td>
