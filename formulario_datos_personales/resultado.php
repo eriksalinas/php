@@ -5,8 +5,8 @@ error_reporting(E_ALL);
 
 if($_POST){
     $nombre = $_POST["textNombre"];
+    $tel = $_POST["textTel"];
     $dni = $_POST["textDni"];
-    $telefono = $_POST["textTelefono"];
     $edad = $_POST["textEdad"];
 }
 ?>
@@ -22,13 +22,13 @@ if($_POST){
 <body>
     <main class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center py-5">
                 <h1>Datos personales</h1>
             </div>
         </div>
         <div class="row"> 
             <div class="col-12">
-                <table>
+                <table class="table table-hover border">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -37,6 +37,14 @@ if($_POST){
                             <th>Edad</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            <td> <?php echo $nombre ?></td>
+                            <td> <?php echo $dni ?> </td>
+                            <td> <?php echo $tel ?></td>
+                            <td> <?php echo $edad?></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
