@@ -32,7 +32,7 @@ if($_POST){
         header("Location: clientes_session.php");
     }
 } 
-//unset($_SESSION)["listadoClientes"][1]; //ELIMINA VARIABLES
+//unset($_SESSION)["listadoClientes"][0]; //ELIMINA VARIABLES
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,19 +54,19 @@ if($_POST){
             <div class="col-5">
                 <form action="clientes_session.php" method="POST">
                    <div class="pb-3">
-                        <label for="">Nombre* <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
+                        <label for="">Nombre* <input type="text" name="txtNombre" id="txtNombre" class="form-control" >
                    </div>
                    <div class="pb-3">
-                        <label for="">Dni* <input type="text" name="txtDni" id="txtDni" class="form-control" required>
+                        <label for="">Dni* <input type="text" name="txtDni" id="txtDni" class="form-control" >
                    </div>
                    <div class="pb-3">
-                        <label for="">Apellido* <input type="text" name="txtApellido" id="txtApellido" class="form-control" required>
+                        <label for="">Apellido* <input type="text" name="txtApellido" id="txtApellido" class="form-control" >
                    </div>
                    <div class="pb-3">
-                        <label for="">Telefono* <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" required>
+                        <label for="">Telefono* <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" >
                    </div>
                    <div class="pb-3">
-                        <label for=""> Edad*<input type="text" name="txtEdad" id="txtEdad" class="form-control" required>
+                        <label for=""> Edad*<input type="text" name="txtEdad" id="txtEdad" class="form-control" >
                    </div>
                    <div class="pb-3">
                         <button class="btn bg-primary" type="submit" name="btnEnviar">Enviar</button>
@@ -87,17 +87,18 @@ if($_POST){
                     </thead>
                     <tbody>
 
-                        <?php 
-                             foreach( $_SESSION["listadoClientes"]as $item){
+                    <?php
+                        foreach($_SESSION["listadoClientes"] as $cliente): 
                         ?>
                         <tr>
-                            <td>  <?php echo $cliente ["nombre"];?></td>
-                            <td> <?php echo $cliente ["dni"]; ?></td>
-                            <td> <?php  echo $cliente ["apellido"];?></td>
-                            <td> <?php  echo $cliente ["telefono"]; ?></td>
-                            <td> <?php  echo $cliente ["edad"];?></td>
+                            <td><?php echo $cliente["nombre"]; ?></td>
+                            <td><?php echo $cliente["dni"]; ?></td>
+                            <td><?php echo $cliente["telefono"]; ?></td>
+                            <td><?php echo $cliente["edad"]; ?></td>
+                       
                         </tr>
-                        <?php }?>
+                        <?php endforeach; ?> 
+                        
                     </tbody>
                     
                 </table>
