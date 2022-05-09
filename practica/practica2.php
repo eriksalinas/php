@@ -19,7 +19,7 @@
                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi consequatur esse possimus nisi quidem corporis fugiat, excepturi voluptatem, similique reprehenderit atque dolor illo voluptates veritatis nemo eaque voluptate. In, nisi.</p>
              </div>
              <div class="py-2 ">
-                <a href="index.php" class="btn btn-primary float-end">Salir</a>
+                <a href="practica1.php" class="btn btn-primary float-end">Salir</a>
                  
              </div>
          </div>
