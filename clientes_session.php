@@ -75,7 +75,7 @@ if($_POST){
                 </form>
             </div>
             <div class="col-7">
-                <table class="table table-hover border">
+                <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th>Nombre:</th>
@@ -92,6 +92,7 @@ if($_POST){
                         ?>
                         <tr>
                             <td><?php echo $cliente["nombre"]; ?></td>
+                            <td><?php echo $cliente["apellido"]; ?></td>
                             <td><?php echo $cliente["dni"]; ?></td>
                             <td><?php echo $cliente["telefono"]; ?></td>
                             <td><?php echo $cliente["edad"]; ?></td>
