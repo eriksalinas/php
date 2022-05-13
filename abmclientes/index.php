@@ -42,7 +42,7 @@ if ($_POST){
                      "telefono" => $telefono, 
                      "correo" => $correo,
                      "imagen" => $nombreImagen
-                    );
+     );
          
     //Convertir el array de clientes en json
     $strjson = json_encode($aClientes);
@@ -119,7 +119,7 @@ if ($_POST){
                         <?php  foreach($aClientes as $pos => $cliente){ ?>
 
                         <tr>
-                            <td></td>
+                        <td> <img src="imagen/" <?php  echo $cliente ["imagen"]; ?> ></td>
                             <td> <?php  echo  $cliente["dni"]; ?></td>
                             <td> <?php echo $cliente["nombre"];?></td>
                             <td> <?php echo $cliente["telefono"];?></td>
