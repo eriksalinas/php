@@ -31,6 +31,7 @@ if($_POST){
         session_destroy();
         header("Location: clientes_session.php");
     }
+   
 } 
 //unset($_SESSION)["listadoClientes"][0]; //ELIMINA VARIABLES
 ?>
@@ -54,7 +55,7 @@ if($_POST){
             <div class="col-5">
                 <form action="clientes_session.php" method="POST">
                    <div class="pb-3">
-                        <label for="">Nombre* <input type="text" name="txtNombre" id="txtNombre" class="form-control" >
+                        <label for="">Nombre* <input type="text" name="txtNombre" id="txtNombre" class="form-control"  >
                    </div>
                    <div class="pb-3">
                         <label for="">Dni* <input type="text" name="txtDni" id="txtDni" class="form-control" >
@@ -88,10 +89,10 @@ if($_POST){
                     <tbody>
 
                     <?php
-                        foreach($_SESSION["listadoClientes"] as $cliente): 
+                        foreach($_SESSION["listadoClientes"] as $cliente):
                         ?>
                         <tr>
-                            <td><?php echo $cliente["nombre"]; ?></td>
+                            <td ><?php echo $cliente["nombre"]; ?> </td>
                             <td><?php echo $cliente["apellido"]; ?></td>
                             <td><?php echo $cliente["dni"]; ?></td>
                             <td><?php echo $cliente["telefono"]; ?></td>

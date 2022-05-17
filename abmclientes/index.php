@@ -36,14 +36,39 @@ if ($_POST){
     $telefono = $_POST ["txtTelefono"];
     $correo = $_POST ["txtCorreo"];
     $nombreImagen ="";
+
+    if ($_FILES["archivo"]["error"] === UPLOAD_ERR_OK) { 
+        $nombreAleatorio = date("Ymdhmsi") . rand(1000, 2000); //202205171842371010
+        $archivo_tmp = $_FILES["archivo"]["tmp_name"]; //C:\tmp\ghjuy6788765
+        $extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+        if($extension == "jpg" || $extension == "png" || $extension == "jpeg"){
+            $nombreImagen = "$nombreAleatorio.$extension";
+            move_uploaded_file($archivo_tmp, "imagen/$nombreImagen");
+        }
+    }
+    if($id >=0){
+        // Si no se subio una imegen y estoy editando conservar en $nombreImagen el nombre
+        //de la imagen anterior que esta asociado al cliente que estamos editando
+        if($_FILES["archivo"]["error"] !=UPLOAD_ERR_OK){
+            $nombreImagen = $aClientes[$id] ["imagen"];
+        }
+        //Si viene una imagen y hay una imagen anterior, eliminar la anterior
+        //Estoy Editando
+        $aClientes[$id] = array("dni" => $dni,
+            "nombre" => $nombre,
+            "telefono" => $telefono,
+            "correo" =>$correo,
+            "imagen" => $nombreImagen);
+    } else{
+        //Estoy insertando un nuevo cliente
+        $aClientes[] = array("dni" => $dni,
+        "nombre" => $nombre,
+        "telefono" => $telefono,
+        "correo" =>$correo,
+        "imagen" => $nombreImagen,);
+    }
    
-    $aClientes [] = array("dni" => $dni,
-                     "nombre" => $nombre, 
-                     "telefono" => $telefono, 
-                     "correo" => $correo,
-                     "imagen" => $nombreImagen
-     );
-         
+    
     //Convertir el array de clientes en json
     $strjson = json_encode($aClientes);
 
@@ -75,7 +100,7 @@ if ($_POST){
         </div>
         <div class="row">
             <div class="col-6">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
                     <div class="pb-3">
                         <label for="">DNI:*</label>
                         <input type="text" name="txtDni" id="txtDni" class="form-control" required value="<?php echo isset($aClientes[$id])? $aClientes[$id]["dni"] : ""; ?>">
@@ -99,7 +124,7 @@ if ($_POST){
                     </div>
                     <div class="pb-2">
                         <button class="btn btn-primary" type="submit">GUARDAR</button>
-                        <button class="btn btn-danger" type="submit">NUEVO</button>
+                        <a href="index.php" class="btn btn-danger my-2">NUEVO</a>
                     </div>
                 </form>
             </div>
@@ -115,11 +140,13 @@ if ($_POST){
                             <th>Acciones</th>
                         </tr>
                     </thead>
+                   
                     <tbody>
+                       
                         <?php  foreach($aClientes as $pos => $cliente){ ?>
 
                         <tr>
-                        <td> <img src="imagen/" <?php  echo $cliente ["imagen"]; ?> ></td>
+                        <td> <img src="imagen/<?php  echo $cliente ["imagen"]; ?>" class="img-thumbnail" ></td>
                             <td> <?php  echo  $cliente["dni"]; ?></td>
                             <td> <?php echo $cliente["nombre"];?></td>
                             <td> <?php echo $cliente["telefono"];?></td>
