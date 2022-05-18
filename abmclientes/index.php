@@ -51,8 +51,14 @@ if ($_POST){
         //de la imagen anterior que esta asociado al cliente que estamos editando
         if($_FILES["archivo"]["error"] !=UPLOAD_ERR_OK){
             $nombreImagen = $aClientes[$id] ["imagen"];
+        } else{
+            //Si viene una imagen y hay una imagen anterior, eliminar la anterior
+            if(file_exists("imagen/". $aClientes [$id] ["imagen"])){
+                unlink("imagen/". $aClientes [$id] ["imagen"]);
+            }
         }
-        //Si viene una imagen y hay una imagen anterior, eliminar la anterior
+        
+
         //Estoy Editando
         $aClientes[$id] = array("dni" => $dni,
             "nombre" => $nombre,
