@@ -106,7 +106,7 @@ if ($_POST){
         </div>
         <div class="row">
             <div class="col-6">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data"> <!-- Es para adjuntar archivos ejemplo: Imagenes-->
                     <div class="pb-3">
                         <label for="">DNI:*</label>
                         <input type="text" name="txtDni" id="txtDni" class="form-control" required value="<?php echo isset($aClientes[$id])? $aClientes[$id]["dni"] : ""; ?>">
