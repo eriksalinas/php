@@ -2,7 +2,39 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+if (file_exists("archivo.txt")){
+    //Si el archivo existe, cargo los clientes en la variable aClientes
+    $strjson = file_get_contents("archivo.txt");
+    $aTareas =json_decode($strjson, true);
+}   
+   else{
+       $aTareas = array();
+   }
+
+   if(isset($_GET["id"])){
+    $id = $_GET["id"];
+} else {
+    $id="";
+}
+if($_POST){ /* es postback ? */
+    $titulo = $_POST["txtTitulo"];
+    $prioridad = $_POST ["lstPrioridad"];
+    $estado = $_POST["lstEstado"];
+    $usurio = $_POST ["ltsUsuario"];
+    $descripcion = $_POST ["txtDescripcion"];
+   
+
+  
+    $aTareas[]=array("titulo" => $titulo,
+                     "prioridad" => $prioridad, 
+                     "estado" => $estado,
+                     "usuario" => $usurio,
+                     "descripcion" => $descripcion,
+                    "fecha" => $aTareas [$id] ["fecha"]);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,8 +56,8 @@ error_reporting(E_ALL);
         </div>
         <div class="row">
             <div class="col-6">
-                <form action="" method="POST">
-                    <div class="py-3">
+                <form action="" method="POST"  enctype="multipart/form-data"> <!-- Es para adjuntar archivos ejemplo: Imagenes--> 
+                    <div class="py-1">
                         <label for="txtTitulo">Titulo</label>
                         <input type="txtTitululo" name="txtTitulo" id="txtTitulo" class="form-control">
                     </div>
@@ -39,7 +71,7 @@ error_reporting(E_ALL);
                         </select>
                     </div>
                     <div class="py-1">
-                        <label for="lstPrioridad">Estado</label>
+                        <label for="lstEstado">Estado</label>
                         <select name="lstEstado" id="lstEstado" class="form-control">
                             <!--Para crear una selda de opciones -->
                             <option value="sin asignado"> Sin asignado</option>
@@ -63,6 +95,7 @@ error_reporting(E_ALL);
                     </div>
                     <div class="p-3">
                         <button type="submit " id="btnEnviar" name="btnEnviar" class="btn btn-primary">ENVIAR</button>
+                        <a href="" type="submit" class="btnt ">Cancelar</a>
                     </div>
 
                 </form>
@@ -70,21 +103,27 @@ error_reporting(E_ALL);
             </div>
             <div class="col-6">
                 <table class="table table-hover border">
-                    <thead>
+                    <thead>           
                         <tr>
                             <th>ID</th>
+                            <th>Fecha de insercion</th>
                             <th>Titulo</th>
                             <th>Estado</th>
                             <th>Prioridad</th>
                             <th>Usuario</th>
-                        </tr>
+                        </tr> 
                     </thead>
                     <tbody>
+                      <?php foreach($aTareas as $pos => $tarea){ ?>
+                        <tr>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td> <?php  echo $tarea ["fecha"]?></td>
+                        <td> <?php echo $tarea ["titulo"];?></td>
+                        <td> <?php echo $tarea ["estado"];?></td>
+                        <td> <?php echo $tarea ["prioridad"]; ?></td>
+                        <td> <?php echo $tarea ["usuario"]; ?></td>
+                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
