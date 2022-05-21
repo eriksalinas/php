@@ -1,1 +1,1 @@
-[{"dni":"43874138","nombre":"Erik","telefono":"1140638603","correo":"juan123@gmail.com"},{"dni":"43874138","nombre":"Erik","telefono":"1140638603","correo":"erik61869@gmail.com"},{"dni":"12345678","nombre":" juan","telefono":" 12345665432","correo":"nay9890@gmail.com"}]
+[]

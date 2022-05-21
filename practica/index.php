@@ -15,22 +15,39 @@ if (file_exists("archivo.txt")){
     //Si el archivo no existe es por que no hay clientes
     $aClientes =array();
 }
+
 if(isset($_GET ["id"])){ // isset Verifica si esta difinido la variable. Variable con datos
     $id = $_GET ["id"]; //Accede a toda a toda la acurio string como "id"
 }else {
     $id=""; //Variable vacia
 }
+
+if(isset($_GET["do"]) && $_GET ["do"] == "eliminar"){ //Pregunta si "do" tiene contenido y si como se llama "eliminar"
+    unset($aClientes [$id]); // unset borra variables/ informacion
+
+    //Convertir aClientes(array)en json
+    $strJson = json_encode($aClientes); //json_encode() Codificar 
+
+    //Almacenar el json en el archivo
+    file:file_put_contents("archivo.txt", $strJson);
+
+    header("Location: index.php");
+    // Se usa todo este metodo para poder eliminar las variables
+}
+
 if ($_POST){
     $dni = $_POST["txtDni"];
     $nombre = $_POST["txtNombre"];
     $telefono = $_POST["txtTelefono"];
     $correo = $_POST ["txtCorreo"];
+    $nombreImagen="";
 
     
     $aClientes[] = array("dni" => $dni,
                         "nombre" => $nombre,
                         "telefono" => $telefono,
-                        "correo" =>$correo
+                        "correo" =>$correo,
+                        "imagen" =>$nombreImagen
     );
     //Convertir el array de aClientes en json
      $strJson = json_encode($aClientes); // $strJson es una variable (Cualquier nombre)que es =  json_encode() CODIFICA
@@ -114,7 +131,7 @@ if ($_POST){
                             <td><?php echo $cliente ["correo"]; ?></td>
                             <td>
                             <a href="?id=<?php echo $pos; // $pos que indica array automaticamente ?>"><i class="fa-solid fa-pen-to-square"></a></i>
-                            <i class="fa-solid fa-trash-can"></i>
+                            <a href="?id=<?php echo $pos; // $pos que indica array automaticamente. Concatenamos &do=eliminar para que haga otra funcion ?>&do=eliminar"><i class="fa-solid fa-trash-can"></a></i>
                             </td>
                             
                         </tr>
