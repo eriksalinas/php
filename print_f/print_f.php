@@ -70,7 +70,7 @@ function print_f5($variable){ //Recomendado Usar esta funcion
        foreach ($variable as $item){
            $contenido .= $item . "\n";  // "\n" es igual que decir <br>, se usa en php
        }
-       fwrite( $archivo1,$item );
+       fwrite( $archivo1,$contenido );
        fclose($archivo1);
     } else{
         //Entonces es string, guardo el contenido en el archivo "datos.txt"
@@ -80,8 +80,8 @@ function print_f5($variable){ //Recomendado Usar esta funcion
 }
 
 // Uso
-$aNotas = array(8,5,7,9,10,);
+$aNotas = array(8,5,7,9,10);
 $msg = "Este es un mensaje";
-print_f3($aNotas); //Usando print_f($); y actualizando la pafina web, automaticamnete se crea un archivo llamado "datos.txt
+print_f5($aNotas); //Usando print_f($); y actualizando la pafina web, automaticamnete se crea un archivo llamado "datos.txt
 ?>
 
