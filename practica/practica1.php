@@ -1,11 +1,47 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+//Paso 3 bucle
+//comprobar si un archivo existe
+if(file_exists("archivo.txt")){
+    //Si el archivo existe, carga las tareas en la variable $aTareas
+    $strJson = file_get_contents("archivo.txt"); //file_get_contents Utilizamos para leer
+    
+    //Convertir el $strJson(Json) a una array
+    $aTareas = json_decode($strJson, true);// json_decode() Descodifica, es $aTareas por q es la array
+
+}
+else{
+    //Si el archivo no existe es por que no hay  tareas
+    $aTareas = array();
+}
+if($_POST){
+    $propiedad = $_POST ["ltsPrioridad"];
+    $usuario = $_POST ["ltsUsuario"];
+    $estado = $_POST ["ltsEstado"];
+    $titulo = $_POST ["txtTitulo"];
+    $descripcion = $_POST ["txtDescripcion"];
+
+    $aTareas= array();
+    $aTareas[] = array("propiedad"=>$propiedad,
+                       "usuario"=>$usuario,
+                       "estado"=>$estado,
+                       "titulo"=>$titulo,
+                       "descripcion"=>$descripcion
+    );
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/fontawesome-free-6.1.1-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-6.1.1-web/css/all.min.css">
     <title>Gestor de tarea</title>
 </head>
 
@@ -17,7 +53,7 @@
             </div>
         </div>
         <div class="row">
-            <form action="" method="POST">
+            <form action="" method="POST" enctype="multipart/form-data">  <!-- Es para adjuntar archivos ejemplo: Imagenes--> 
                 <div class="row pb-2">
                     <div class="col-4">
                         <label for="ltsPrioridad">Prioridad</label>
@@ -38,6 +74,7 @@
                     <div class="col-4">
                         <label for="ltsEstado">Estado</label>
                         <select name="ltsEstado" id="ltsEstado" class="form-control">
+                            <option value=""disabled selected>Seleccionar</option>
                             <option value="sin asignar">Sin asignar</option>
                             <option value="asignado">Asignado</option>
                             <option value="en proceso">En proceso</option>
@@ -58,7 +95,7 @@
                 <div class="row">
                     <div class="text-center">
                         <button class="btn btn-primary" type="submit">ENVIAR</button>
-                        <a href="practica1.php" class="btn ">CANCELAR</a>
+                        <a href="practica1.php" class="btn btn-secondary">CANCELAR</a>
                     </div>
                 </div>
             </form>
@@ -76,6 +113,22 @@
                             <th>Estado</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <?php foreach($aTareas as $tareas){ ?>
+                        <tr>
+                            <td><?php echo $tareas [""]; ?></td>
+                            <td><?php echo $tareas [""]; ?></td>
+                            <td><?php echo $tareas ["titulo"];?></td>
+                            <td><?php echo $tareas ["propiedad"];?></td>
+                            <td><?php echo $tareas ["usuario"];?></td>
+                            <td><?php echo $tareas ["estado"];?></td>
+                            <td>
+                                 <i class="fa-solid fa-pen-to-square"></i>
+                                 <i class="fa-solid fa-trash-can"></i>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
                 </table>
             </div>
         </div>

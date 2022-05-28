@@ -43,7 +43,7 @@ if ($_POST){
     $correo = $_POST ["txtCorreo"];
     $nombreImagen="";
 
-    // Para guardar ina imegen temporalmente
+    // Para guardar una imegen temporalmente
     if(($_FILES["archivo"]["error"]) === UPLOAD_ERR_OK){ //Significa que no hay error
         $nombreAleatorio = date ("Ymdhmsi") . rand(1000,2000); //202205171842371010. Se usa un nombre aleatorio
         $archivo_tmp = $_FILES ["archivo"] ["tmp_name"]; 
