@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+$mensaje = ""; //Esto va fuera del post la variable
 
 // Es POST?
 //Va todo en POST por que no trabajamos con la opccion boton ENVIAR
@@ -12,7 +13,7 @@ if($_POST){
          $strJson = file_get_contents("invitados.txt");
 
           //Convierte el $steJson(json) a una array
-         $aInvitados = explode(",", $strJson);
+         $aInvitados = explode(",", $strJson); //explode genera una array para cada 
     }
     //Si no el array queda como una array vacio
     else{
@@ -66,9 +67,9 @@ if($_POST){
         <div class="row">
             <div class="col-12 pt-3">
                 <h1 class="pb-3">Lista de invitados</h1>
-              <?php if($mensajec !=""): ?>
-                <div class="alert alert- <?php echo $alert;?>" role="alert"> 
-                        <?php echo $mensaje; ?>
+                <?php if($mensaje !=""): ?>
+                <div class="alert alert-<?php echo $alert;?>" role="alert"> 
+                        <?php echo $mensaje;  ?>
                 </div>
                 <?php endif;?>
                 <p>Completa el siguiente formulario:</p>
@@ -78,12 +79,14 @@ if($_POST){
             <div class="col-7">
                 <form action="" method="POST">
                     <div class="pt-3">
-                        <p>Ingresar el DNI:</p> <input type="text" name="txtDni" id="txtDni" class="form-control">  <!--Se utiliza este metodo de boton  para vedificar el dato como DNI -->
+                        <label for="">Ingresar el DNI:</label>
+                        <input type="text" name="txtDni" id="txtDni" class="form-control">  <!--Se utiliza este metodo de boton  para vedificar el dato como DNI -->
                         <input type="submit" name="btnProcesar"id="btnPorecesar" value="Verificar invitado" class="btn btn-primary">
                     </div>
                     <div class="pb-2">
-                        <p>Ingresar el código secreto para el pase VIP:</p> <input type="text" name="txtCodigo" id="txtCodigo" class="form-control">
-                        <input type="submit" name="btnVip"id="btnVip" value="Verificar codigo" class="btn btn-primary">
+                        <label for="">Ingresar el código secreto para el pase VIP:</label>
+                        <input type="text" name="txtCodigo" id="txtCodigo" class="form-control">
+                        <input type="submit" name="btnVip"id="btnVip" value="Verificar codigo" class="btn btn-primary"> <!-- value/ valor-->
                     </div>
                 </form>
             </div>
