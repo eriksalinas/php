@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$mensaje = ""; //Esto va fuera del post la variable
+$mensaje = ""; //Esto va fuera del post la variable para generar las alertas
 
 // Es POST?
 //Va todo en POST por que no trabajamos con la opccion boton ENVIAR
