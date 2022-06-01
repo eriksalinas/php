@@ -3,26 +3,105 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+//Primer paso se difinen las class
+//Todos las clases Padres (class Persona) tienen que estar los datos protegidos
+//Todos las clases Hijas (class Alumno extends Persona) tienen que estar privado
+//Todas las funciones quedan publicas
 class Persona{
-public $dni;
-public $nombre;
-public $edad;
-public $nacionalidad;
+    protected $dni;
+    protected $nombre;
+    protected $edad;
+    protected $nacionalidad;
 
-public function __construct(){
-    $this->dni = 43876209;
-    $this->nombre = "erik";
-    $this->edad=20;
+    public function imprimir(){}
+ 
+    public function __destruct()  { //Destruye toda la informacion una vez que finaliza y libera espacio de Ram.
+        echo "Destruyendo el objeto " . $this->nombre . "<br>";
+    }
 }
+class Alumno extends Persona{ //extends(Extiende) es para decir de vuelta lo mismo que otra class
+    private $legajo;
+    private $notaPortfolio;
+    private $notaPhp;
+    private $notaProyecto;
 
+    public function __construct($dni ="", $nombre =""){ // Se utiliza cuando hay datos o numeros en la class Alumno extendes Persona. $notasPhp = 0.0;
+        $this->dni = $dni;
+        $this->nombre = $nombre;                      //No se puede utilizar mas de 1 ves el public function __construct en una misma clase
+        $this->notaPortfolio = 0.0;                   // Usando este public function __construct($dni ="", $nombre ="" se muestra em la pagina web tambein
+        $this->notaPhp = 0.0;
+        $this->notaProyecto = 0.0;
 
 }
-class Alumnos extends Persona{ //extends(Extiende) es para decir de vuelta lo mismo que otra class
+    public function imprimir(){ //Imprime en pantalla los datos puestos.
+                                // Para acceder a las propiedades de las class se utiliza this.
+        echo "Alumno:  " . $this->nombre . "<br>";
+        echo "Documento:  " . $this->dni . "<br>";
+        echo "Nota del portfolio  " . $this->notaPortfolio ."<br><br>";
+      
+    }
 
+    public function __destruct()  { //Destruye toda la informacion una vez que finaliza y libera espacio de Ram.
+        echo "Destruyendo el objeto " . $this->nombre . "<br>";
+    }
+
+    public function calcularPromedio(){
+
+    }
 
 }
 
 class Docente extends Persona{
+    private $especialidad;
 
+    const ESPECIALIDAD_WP = "Wordpress"; //Se utiliza este metodo para no tener o generar errores ortografico al escribir la informacion
+    const ESPECIALIDAD_ECO = "Economía aplicada";
+    const ESPECIALIDAD_BBDD = "Base de datos";
+    public function imprimir()
+    {
+        echo "Nombre del docente:" . $this->nombre . "<br>";
+        echo "Especialidad:" . $this->especialidad . "<br><br>";
+        
+    }
+    public function imprimirEspecialidadesHabilitadas(){
+
+        echo "Especialidades: <br>"; //echo self:: Para agragar varios contenidos de la class como Especialidades
+        echo self::ESPECIALIDAD_BBDD . "<br>";
+        echo self::ESPECIALIDAD_ECO . "<br>";
+        echo self::ESPECIALIDAD_WP ."<br><br>";
+    }
+
+    public function __destruct(){ //Destruye toda la informacion una vez que finaliza y libera espacio de Ram.
+        echo "Destruyendo el objeto " . $this->nombre . "<br>";
+    }
 }
+//Segundo paso escribimos la parte del programa, se escribe los objetos y se definen
+
+$alumno1 = new Alumno("24876109", "Juanda Mendoza"); //Este es otro metodo para usar con public function __construct($dni ="", $nombre =""
+
+$alumno1->edad = 32;
+$alumno1->nacionalidad = "Argentina";
+$alumno1->notaPhp = 9;
+$alumno1->notaPortfolio = 10;
+$alumno1->notaProyecto = 7;
+$alumno1->imprimir(); //Para que se muestre en pantalla (Pagina web)
+
+
+$alumno2 = new Alumno();
+$alumno2->nombre = "Erik";
+$alumno2->edad = 20;
+$alumno2->nacionalidad = "Argentin0";
+$alumno2->dni = 90762345;
+$alumno2->notaPhp = 7;
+$alumno2->notaPortfolio = 10;
+$alumno2->notaProyecto = 9;
+$alumno2->imprimir(); //Para que se muestre en pantalla (Pagina web)
+
+$docente = new Docente();
+$docente->nombre = "Sergio Gonzales";
+$docente->especialidad = Docente::ESPECIALIDAD_ECO; // Se utilizo el metodo const ESPECIALIDAD_ECO Para no escribir y no tener errores ortograficos
+$docente->imprimir(); //Para que se muestre en pantalla (Pagina web)
+$docente->imprimirEspecialidadesHabilitadas(); //Se utilizo echo self:: para agregar varias especialidades y Para no escribir y no tener errores ortograficos
+
+
 ?>
