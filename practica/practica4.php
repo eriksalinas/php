@@ -2,28 +2,37 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+date_default_timezone_set("America/Argentina/Buenos_Aires");
 
-//Definir class
-//Se utiliza las class protegida cuando hay una class hija, sino es privada la class
-class Cliente{
+class Cliente
+{
     private $dni;
     private $nombre;
+    private $correo;
     private $telefono;
     private $descuento;
 
-    public function imprimir(){
-        echo "Dni:" . $this->dni . "<br>";
-        echo "Nombre:" . $this->nombre . "<br>";
-        echo "Telefono:" . $this->telefono . "<br>";
-        echo "Descuento:" . $this->descuento . "<br><br>";
+    public function __construct() {
+        $this->descuento = 0.0;
     }
 
-    public function __construct(){$this->descuento = 0.0;}
+    public function __get($propiedad) {
+        return $this->$propiedad;
+    }
 
-    //Se utiliza este metodo para seguir usando las -> 
-    public function __get($propiedad){return $this->$propiedad;}
-    public function __set($propiedad, $valor){$this->$propiedad = $valor;}
-  
+    public function __set($propiedad, $valor) {
+        $this->$propiedad = $valor;
+    }
+
+    public function imprimir()
+    {
+        echo "Documento: " . $this->dni . "<br>";
+        echo "Nombre: " . $this->nombre . "<br>";
+        echo "Correo: " . $this->correo . "<br>";
+        echo "Telefono: " . $this->telefono . "<br>";
+        echo "Descuento: " . $this->descuento . "<br><br>";
+
+    }
 }
 
 class Producto{
@@ -33,39 +42,59 @@ class Producto{
     private $descripcion;
     private $iva;
 
-    public function imprimir(){
-        echo "COD:" . $this->cod . "<br>";
-        echo "Nombre:" . $this->nombre . "<br>";
-        echo "Precio:" . $this->precio . "<br>";
-        echo "Descripcion:" . $this->descripcion . "<br>";
-        echo "Iva:" . $this->iva . "<br><br>";
+    public function __construct(){
+        $this->precio= 0.0;
+        $this->iva = 0.0;
     }
 
-    public function __construct(){$this->precio = 0.0; $this->iva = 0.0;}
+    public function __get($propiedad) {
+        return $this->$propiedad;
+    }
 
-    //Se utiliza este metodo para seguir usando las -> 
-    public function __get($propiedad){return $this->$propiedad;}
-    public function __set($propiedad, $valor){$this->$propiedad = $valor;}
+    public function __set($propiedad, $valor) {
+        $this->$propiedad = $valor;
+    }
+    
+    public function imprimir(){
+        echo "COD: " . $this->cod . "<br>";
+        echo "Nombre: " . $this->nombre . "<br>";
+        echo "Precio: " . $this->precio . "<br>";
+        echo "Descripcion: " . $this->descripcion . "<br>";
+        echo "IVA: " . $this->iva . "<br>";
+    }
+
 }
 
 class Carrito{
-    private $cliente; //Objeto
-    private $aProductos; //array del objetos
-    private $subTotal; 
+    private $cliente; //objeto
+    private $aProductos; //array de objetos
+    private $subTotal;
     private $total;
 
-    public function imprimir(){}
+    public function __construct(){
+        $this->aProductos = array();
+        $this->subTotal = 0.0;
+        $this->total = 0.0;
+    }
 
-    public function __construct(){$this->aProductos = array(); $this->subTotal = 0.0;$this->total = 0.0;}
+    public function __get($propiedad) {
+        return $this->$propiedad;
+    }
 
-    public function cargarProducto($producto){ $this->aProductos[] = $producto;} //Conaultar con el profe
+    public function __set($propiedad, $valor) {
+        $this->$propiedad = $valor;
+    }
 
-    public function imprimirTicket() { //que es colspan? precios?? date("d/m/Y H:i:s") fecha y hora
+    public function cargarProducto($producto){
+        $this->aProductos[] = $producto;
+    }
+
+    public function imprimirTicket() {
         echo "<table class='table table-hover border' style='width:400px'>";
         echo "<tr><th colspan='2' class='text-center'>ECO MARKET</th></tr>
               <tr>
                 <th>Fecha</th>
-                <td>" . date("d/m/Y H:i:s") . "</td> 
+                <td>" . date("d/m/Y H:i:s") . "</td>
               </tr>
               <tr>
                 <th>DNI</th>
@@ -97,50 +126,39 @@ class Carrito{
               </tr>
         </table>";
     }
- 
-
-    
-    
-     //Se utiliza este metodo para seguir usando las -> 
-     public function __get($propiedad){return $this->$propiedad;}
-     public function __set($propiedad, $valor){$this->$propiedad = $valor;}
 }
-// Escribir programa
+
+//Programa
 $cliente1 = new Cliente();
 $cliente1->dni = "34765456";
-$cliente1->nombre = "Bernabe";
+$cliente1->nombre = "Bernabé";
 $cliente1->correo = "bernabe@gmail.com";
 $cliente1->telefono = "+541188598686";
 $cliente1->descuento = 0.05;
-//print_r($cliente1);
 //$cliente1->imprimir();
 
 $producto1 = new Producto();
 $producto1->cod = "AB8767";
-$producto1->nombre = "Netebook 12\"HP"; // Se utiliza 12\" para poner las pulgadas
+$producto1->nombre = "Notebook 15\" HP";
 $producto1->descripcion = "Esta es una computadora HP";
 $producto1->precio = 30800;
 $producto1->iva = 21;
 //$producto1->imprimir();
 
 $producto2 = new Producto();
-$producto2->cod = "QWR579";
-$producto2->nombre = "Heladera Whirlpool";
-$producto2->descripcion = "Esta es una heladera no froze";
-$producto2->precio = 76000;
-$producto2->iva =10.5;
+$producto2->cod = "JBGH678";
+$producto2->nombre = "TV Samsung 42\"";
+$producto2->descripcion = "Televisor HD";
+$producto2->precio = 60800;
+$producto2->iva = 10.5;
 //$producto2->imprimir();
 
 $carrito = new Carrito();
 $carrito->cliente = $cliente1;
-//print_r($carrito);
 $carrito->cargarProducto($producto1);
 $carrito->cargarProducto($producto2);
-//print_r($carrito);
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
