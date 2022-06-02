@@ -13,6 +13,24 @@ class Persona{
     protected $edad;
     protected $nacionalidad;
 
+
+    public function setDni($dni){ $this->dni = $dni;  }  //Se utliza esta metodo(por que pueden ser punlicos ) set y get para  accinar un parametro a la variable
+    public function getDni(){return $this->dni;}        //Los metodos  se imprimer en 
+                                                        // Es solo un ejemplo, no usar este metodo
+
+
+    public function setNombre($nombre){$this->nombre = $nombre;}
+    public function getNombre(){ return $this->nombre;}
+
+
+    public function setEdad($edad){$this->edad = $edad; }
+    public function getEdad(){return $this->edad;}
+
+
+    public function setNacionalidad($nacionalidad){$this->nacionalidad = $nacionalidad; }
+    public function getNacionalidad(){ return $this->nacionalidad;}
+
+
     public function imprimir(){}
  
     public function __destruct()  { //Destruye toda la informacion una vez que finaliza y libera espacio de Ram.
@@ -24,6 +42,11 @@ class Alumno extends Persona{ //extends(Extiende) es para decir de vuelta lo mis
     private $notaPortfolio;
     private $notaPhp;
     private $notaProyecto;
+
+    //Se utiliza este metodo para seguir usando las -> 
+    public function __get($propiedad){return $this->$propiedad;}
+    public function __set($propiedad, $valor){$this->$propiedad = $valor;}
+
 
     public function __construct($dni ="", $nombre =""){ // Se utiliza cuando hay datos o numeros en la class Alumno extendes Persona. $notasPhp = 0.0;
         $this->dni = $dni;
@@ -53,6 +76,10 @@ class Alumno extends Persona{ //extends(Extiende) es para decir de vuelta lo mis
 
 class Docente extends Persona{
     private $especialidad;
+    
+     //Se utiliza este metodo para seguir usando las ->
+    public function __get($propiedad){return $this->$propiedad;}
+    public function __set($propiedad, $valor){$this->$propiedad = $valor;}
 
     const ESPECIALIDAD_WP = "Wordpress"; //Se utiliza este metodo para no tener o generar errores ortografico al escribir la informacion
     const ESPECIALIDAD_ECO = "Economía aplicada";
@@ -88,10 +115,11 @@ $alumno1->imprimir(); //Para que se muestre en pantalla (Pagina web)
 
 
 $alumno2 = new Alumno();
-$alumno2->nombre = "Erik";
-$alumno2->edad = 20;
-$alumno2->nacionalidad = "Argentin0";
-$alumno2->dni = 90762345;
+$alumno2->setNombre("erik"); //Ejemplo de la funcion Set y get 
+$alumno2->setEdad(20);
+$alumno2->setNacionalidad("Argentino");
+$alumno2->setDni(90762345);
+
 $alumno2->notaPhp = 7;
 $alumno2->notaPortfolio = 10;
 $alumno2->notaProyecto = 9;
