@@ -11,12 +11,16 @@ class Persona{
     protected $celular;
 
 
-    public function imprimir(){
-
-    }
+   
      //Se utiliza este metodo para seguir usando las -> 
-     public function __get($propiedad){return $this->$propiedad;}
-     public function __set($propiedad, $valor){$this->$propiedad = $valor;}
+     public function __get($propiedad)
+     {
+         return $this->$propiedad;
+        }
+     public function __set($propiedad, $valor)
+     {
+         $this->$propiedad = $valor;
+        }
  
     
 }
@@ -40,12 +44,18 @@ class Entrenador extends Persona{
         echo "Clases:". $this->aClases . "<br>";
     }
      //Se utiliza este metodo para seguir usando las -> 
-     public function __get($propiedad){return $this->$propiedad;}
-     public function __set($propiedad, $valor){$this->$propiedad = $valor;}
+     public function __get($propiedad)
+     {
+         return $this->$propiedad;
+        }
+     public function __set($propiedad, $valor)
+     {
+         $this->$propiedad = $valor;
+        }
  
 }
 class Alumno extends Persona{
-    private $fechaNac;
+    private $fechaN;
     private $peso;
     private $altura;
     private $aptoFisico;
@@ -65,7 +75,7 @@ class Alumno extends Persona{
     }
    
     public function setFichaMedica($peso,$altura,$aptoFisico){//Este metodo se utiliza si es que en el programa esta con () y se agrega $this
-                                                              //Como no hat datos se pone de la siguiente manera $this->dni = $dni;
+                                                              //Como no hay datos se pone de la siguiente manera $this->dni = $dni;
         $this->peso = $peso;
         $this->altura = $altura;
         $this->aptoFisico = $aptoFisico;
@@ -78,34 +88,49 @@ class Alumno extends Persona{
         echo "Presentismo:". $this->presentismo . "<br>";
     }
      //Se utiliza este metodo para seguir usando las -> 
-     public function __get($propiedad){return $this->$propiedad;}
-     public function __set($propiedad, $valor){$this->$propiedad = $valor;}
+     public function __get($propiedad)
+     {
+         return $this->$propiedad;
+        }
+     public function __set($propiedad, $valor)
+     {
+         $this->$propiedad = $valor;
+        }
  
 }
 class Clase{
-    private $nombre;
-    private $entrenador;
-    private $aAlumnos;
+    private $nombre;//string
+    private $entrenador;//objeto
+    private $aAlumnos;//array de objetos
 
     public function __construct(){
        $this->aAlumnos = array(); 
     }
 
-    public function asignarEntrenador(){
+    public function asignarEntrenador($entrenador){
+        $this->entrenador = $entrenador;
 
     }
-    public function inscribirAlumno(){
+    public function inscribirAlumno($alumno){
 
+        $this->aAlumnos[] = $alumno;  //[] es un vacio cuando hay mas de una persona se pine[]
     }
     public function imprimirListado(){
-        echo "Nombres:". $this->nombre . "<br>";
-        echo "Entrenador:". $this->entrenador . "<br>";
-        echo "Alumnos:". $this->alumnos . "<br>";
+       echo "<br> Nombre de la clase:" . $this->nombre . "<br>";
+       echo "Entrenado" . $this->entrenador->nombre ; 
+       echo "<br> Alumnos: <br> ";
+       foreach($this->aAlumnos as $alumno){
+            echo"DNI: " . $alumno->dni . " nombre: " . $alumno->nombre . "<br>";
+       } 
     }
      //Se utiliza este metodo para seguir usando las -> 
-     public function __get($propiedad){return $this->$propiedad;}
-     public function __set($propiedad, $valor){$this->$propiedad = $valor;}
- 
+     public function __get($propiedad) {
+        return $this->$propiedad;
+    }
+
+    public function __set($propiedad, $valor) {
+        $this->$propiedad = $valor;
+    }
 }
 
 //Segundo paso Desarrollar Programa
@@ -120,8 +145,8 @@ $entrenador2 = new Entrenador("28987589", "Andrea Zarate", "andrea@mail.com", "1
 $alumno1 = new Alumno("40787657", "Dante Montera", "dante@mail.com", "1145632457", "1997-08-28");
 $alumno1->setFichaMedica(90, 178, true);
 $alumno1->presentismo = 78;
-print_r($alumno1);
-exit;
+
+
 
 $alumno2 = new Alumno("46766547", "Darío Turchi", "dario@mail.com", "1145632457", "1986-11-21");
 $alumno2->setFichaMedica(73, 1.68, false);
@@ -135,6 +160,7 @@ $alumno3->presentismo = 88;
 $alumno4 = new Alumno("41687536", "Gastón Aguilar", "gaston@mail.com", "1145632457", "1999-11-02");
 $alumno4->setFichaMedica(70, 1.69, false);
 $alumno4->presentismo = 98;
+
 
 $clase1 = new Clase();
 $clase1->nombre = "Funcional";

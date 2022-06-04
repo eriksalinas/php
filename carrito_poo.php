@@ -56,11 +56,19 @@ class Carrito{
 
     public function imprimir(){}
 
-    public function __construct(){$this->aProductos = array(); $this->subTotal = 0.0;$this->total = 0.0;}
+    public function __construct(){
 
-    public function cargarProducto($producto){ $this->aProductos[] = $producto;} //Conaultar con el profe
+      $this->aProductos = array(); 
+      $this->subTotal = 0.0;
+      $this->total = 0.0;
+    }
 
-    public function imprimirTicket() { //que es colspan? precios?? date("d/m/Y H:i:s") fecha y hora
+    public function cargarProducto($producto){ 
+
+      $this->aProductos[] = $producto;
+    } 
+
+    public function imprimirTicket() { //que es colspan?  date("d/m/Y H:i:s") fecha y hora
         echo "<table class='table table-hover border' style='width:400px'>";
         echo "<tr><th colspan='2' class='text-center'>ECO MARKET</th></tr>
               <tr>
