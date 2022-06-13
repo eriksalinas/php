@@ -8,11 +8,14 @@ error_reporting(E_ALL);
 
 date_default_timezone_set('America/Argentina/Buenos_Aires');  //Para poner el dia y hora de zona horaria
 
-class Persona{
+ abstract class Persona{
     protected $dni;
     protected $nombre;
     protected $correo;
     protected $celular;
+    
+    abstract public function imprimir(); //abstract nos permite imprimir 
+
     
     public function __get($propiedad)
     {
@@ -46,7 +49,7 @@ class Cliente extends Persona {
     }
 
 
-    public function imprimirListado(){
+    public function imprimir(){
         
     }
 

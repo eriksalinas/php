@@ -29,10 +29,7 @@ class Entrenador extends Persona{
 
     public function __construct($dni, $nombre, $correo, $celular){ //Este metodo se utiliza si es que en el programa esta con () y se agrega $this
                                                                     //Como no hat datos se pone de la siguiente manera $this->dni = $dni;
-        $this->dni = $dni;
-        $this->nombre = $nombre;
-        $this->correo = $correo;
-        $this->celular = $celular;
+       parent:: __construct($dni, $nombre, $correo, $celular); //Utilizando la opcion parent no hace falta copiar $this-> en cada caso, damos mas seguridad al codigo a lo conceptual
          $this->aClases = array(); 
     }
 
@@ -62,12 +59,8 @@ class Alumno extends Persona{
     private $presentismo;
 
     public function __construct($dni, $nombre, $correo, $celular, $fechaNac) {//Este metodo se utiliza si es que en el programa esta con () y se agrega $this
-                                                                              //Como no hat datos se pone de la siguiente manera $this->dni = $dni;
-      $this->dni =$dni;
-      $this->nombre =$nombre;
-      $this->correo = $correo;
-      $this->celular = $celular;
-      $this->fechaNac = $fechaNac;
+                                                                              //Como no hat datos se pone de la siguiente manera $this->dni = $dni
+      parent::__construct($dni, $nombre, $correo, $celular, $fechaNac); //Utilizando la opcion parent para no  copiar $this-> en cada caso, damos mas seguridad al codigo a lo conceptual
       $this->peso = 0.0;
       $this->altura = 0.0;
       $this->aptoFisico = false;

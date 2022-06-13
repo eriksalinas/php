@@ -51,7 +51,7 @@ if ($_POST){
 
         if($extension == "jpg" || $extension == "png" || $extension == "jpeg"){
             $nombreImagen = "$nombreAleatorio. $extension";
-            move_uploaded_file($archivo_tmp, "imagenes/$nombreImagen"); //Guarda el archivo físicamente
+            move_uploaded_file($archivo_tmp, "imagen/$nombreImagen"); //Guarda el archivo físicamente
         }
 
     }
@@ -162,7 +162,7 @@ if ($_POST){
                             foreach($aClientes as $pos =>  $cliente){ // EL $pos nos indica si la array es un 0,1,2, etc
                         ?>
                         <tr>
-                            <td> <img src="imagenes/<?php echo $cliente ["imagen"]; ?>" class="img-thumbnail" ></td> <!-- Se utiliza para mostrar una imagen y  class="img-thumbnail" para que se vea miniatura-->
+                            <td> <img src="imagen/<?php echo $cliente ["imagen"]; ?>" class="img-thumbnail" ></td> <!-- Se utiliza para mostrar una imagen y  class="img-thumbnail" para que se vea miniatura-->
                             <td><?php echo $cliente ["dni"]; ?></td>
                             <td><?php echo $cliente ["nombre"]; ?></td>
                             <td><?php echo $cliente ["telefono"]; ?></td>
