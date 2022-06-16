@@ -4,7 +4,7 @@ class venta
 {
     private $idventa;
     private $fk_idcliente;
-    private $fk_producto;
+    private $fk_idproducto;
     private $fecha;
     private $cantidad;
     private $preciounitario;
@@ -49,7 +49,7 @@ class venta
         //Arma la query
         $sql = "INSERT INTO ventas (
                     fk_idcliente,
-                    fk_producto,
+                    fk_idproducto,
                     fecha,
                     cantidad,
                     preciounitario,
@@ -83,8 +83,8 @@ class venta
                 fk_idcliente = '".$this->cliente."',
                 fk_idproducto = " .$this->producto .",
                 fecha = ".$this->fecha.",
-                cantidad = '".$this->cantidad."',
-                preciounitario =  '".$this->unitario."',
+                cantidad = ".$this->cantidad.",
+                preciounitario =  ".$this->unitario.",
                 total =  ".$this->total."
                 WHERE idventas =  . $this->idventa ";
 
@@ -126,18 +126,15 @@ class venta
         if ($fila = $resultado->fetch_assoc()) {
             $this->idventa = $fila["idventas"];
             $this->fk_idcliente = $fila["fk_idcliente"];
-            $this->fecha = $fila["fecha"];
-            $this->cantidad = $fila["cantidad"];
-            $this->preciounitario = $fila["preciounitario"];
-            $this->total = $fila["total"];
+            $this->fk_idproducto = $fila["fk_idproducto"];
             if(isset($fila["fecha"])){
                 $this->fecha_nac = $fila["fecha"];
             } else {
                 $this->fecha_nac = "";
             }
-            $this->fk_idprovincia = $fila["fk_idprovincia"];
-            $this->fk_idlocalidad = $fila["fk_idlocalidad"];
-            $this->domicilio = $fila["domicilio"];
+            $this->cantidad = $fila["cantidad"];
+            $this->preciounitario = $fila["preciounitario"];
+            $this->total = $fila["total"];
           
         }
         $mysqli->close();
@@ -166,20 +163,17 @@ class venta
             while($fila = $resultado->fetch_assoc()){
                 $entidadAux = new venta();
                 $entidadAux->idventa = $fila["idventas"];
-                $entidadAux->fk_idcliente = $fila["fk_cliente"];
-                $entidadAux->fecha = $fila["fecha"];
+                $entidadAux->fk_idcliente = $fila["fk_idcliente"];
+                $entidadAux->fk_idproducto = $fila["fk_idproducto"];
+                if(isset($fila["fecha"])){
+                    $entidadAux->fecha= $fila["fecha"];
+                } else {
+                    $entidadAux->fecha = "";
+                }
                 $entidadAux->cantidad = $fila["cantidad"];
                 $entidadAux->preciounitario = $fila["preciounitario"];
                 $entidadAux->total = $fila["total"];
-                if(isset($fila["fecha"])){
-                    $entidadAux->fecha_nac = $fila["fecha"];
-                } else {
-                    $entidadAux->fecha_nac = "";
-                }
-                $entidadAux->fk_idprovincia = $fila["fk_idprovincia"];
-                $entidadAux->fk_idlocalidad = $fila["fk_idlocalidad"];
-                $entidadAux->domicilio = $fila["domicilio"];
-                $aResultado[] = $entidadAux;
+               
             }
         }
         return $aResultado;
