@@ -8,7 +8,7 @@ class producto
     private $precio;
     private $descripcion;
     private $imagen;
-    private $fk_idtipoprodidad;
+    private $fk_idtipoproducto;
   
     public function __construct()
     {
@@ -35,10 +35,8 @@ class producto
         $this->precio = isset($request["txtPrecio"]) ? $request["txtPrecio"] : "";
         $this->descripcion= isset($request["txtDescripcion"]) ? $request["txtDescripcion"] : "";
         $this->imagen = isset($request["img"]) ? $request["img"] : "";
-        $this->fk_idtipoprodidad = isset($request["lstProducto"]) ? $request["lstProducto"] : "";
-        if (isset($request["txtAnioNac"]) && isset($request["txtMesNac"]) && isset($request["txtDiaNac"])) {
-            $this->fecha_nac = $request["txtAnioNac"] . "-" . $request["txtMesNac"] . "-" . $request["txtDiaNac"];
-        }
+        $this->fk_idtipoproducto = isset($request["lstProducto"]) ? $request["lstProducto"] : "";
+       
     }
 
     public function insertar()
@@ -52,7 +50,7 @@ class producto
                     precio,
                     descripcion,
                     imagen,
-                    fk_idtipoproridad
+                    fk_idtipoproducto
                    
                 ) VALUES (
                     '$this->nombre',
@@ -60,7 +58,7 @@ class producto
                     $this->precio,
                     '$this->descripcion',
                     '$this->imagen',
-                    $this->fk_idtipoprodidad,
+                    $this->fk_idtipoproducto
                  
                 );"; //Comillas solo van para los string(no llevan los numeros)
         // print_r($sql);exit;
@@ -84,7 +82,7 @@ class producto
                 precio = ".$this->precio.",
                 descripcion = '".$this->descripcion."',
                 imagen =  '".$this->imagen."',
-                fk_idtipoproridad =  '".$this->fk_idtipoprodidad."'
+                fk_idtipoproducto=  '".$this->fk_idtipoproducto."'
                 WHERE idproductos =  . $this->idproducto ";
 
         if (!$mysqli->query($sql)) {
@@ -108,13 +106,13 @@ class producto
     public function obtenerPorId()
     {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "SELECT idproducto,
+        $sql = "SELECT idproductos,
                         nombre,
                         cantidad,
                         precio,
                         descripcion,
                         imagen,
-                        fk_idtipoprodidad
+                        fk_idtipoproducto
                 FROM productos
                 WHERE idproductos = $this->idproducto";
         if (!$resultado = $mysqli->query($sql)) {
@@ -123,13 +121,13 @@ class producto
 
         //Convierte el resultado en un array asociativo
         if ($fila = $resultado->fetch_assoc()) {
-            $this->idproducto = $fila["idproductos"];
+            $this->idproducto = $fila["idproducto"];
             $this->nombre = $fila["nombre"];
             $this->cantidad = $fila["cantidad"];
             $this->precio = $fila["precio"];
             $this->descripcion = $fila["descripcion"];
             $this->imagen = $fila["imagen"];
-            $this->fk_idtipoprodidad = $fila["fk_idtipoprodidad"];
+            $this->fk_idtipoproducto = $fila["fk_idtipoproducto"];
             if(isset($fila["fecha_nac"])){
                 $this->fecha_nac = $fila["fecha_nac"];
             } else {
@@ -152,7 +150,7 @@ class producto
                     precio,
                     descripcion,
                     imagen,
-                    fk_idtipoprodidad
+                    fk_idtipoproducto
                 FROM productos";
         if (!$resultado = $mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -163,22 +161,16 @@ class producto
             //Convierte el resultado en un array asociativo
 
             while($fila = $resultado->fetch_assoc()){
-                $entidadAux = new producto();
-                $entidadAux->idproducto = $fila["idproductos"];
+                $entidadAux = new Producto();
+                $entidadAux->idproducto = $fila["idproducto"];
                 $entidadAux->nombre = $fila["nombre"];
                 $entidadAux->cantidad = $fila["cantidad"];
                 $entidadAux->precio = $fila["precio"];
                 $entidadAux->descripcion = $fila["descripcion"];
                 $entidadAux->imagen = $fila["imagen"];
-                $entidadAux->fk_idtipoprodidad = $fila["fk_idtipoprodidad"];
-                if(isset($fila["fecha_nac"])){
-                    $entidadAux->fecha_nac = $fila["fecha_nac"];
-                } else {
-                    $entidadAux->fecha_nac = "";
-                }
-                $entidadAux->fk_idprovincia = $fila["fk_idprovincia"];
-                $entidadAux->fk_idlocalidad = $fila["fk_idlocalidad"];
-                $entidadAux->domicilio = $fila["domicilio"];
+                $entidadAux->fk_idtipoproducto = $fila["fk_idtipoproducto"];
+             
+                
                 $aResultado[] = $entidadAux;
             }
         }

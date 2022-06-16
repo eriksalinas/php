@@ -1,8 +1,8 @@
 <?php
 
 include_once "config.php";
-include_once "sistema_ventas/usuario.php";
-$pg = "Listado de clientes";
+include_once "entidades/usuario.php";
+$pg = "Listado de usuarios";
 
 $usuario = new Usuario();
 $aUsuario = $usuario->obtenerTodos();

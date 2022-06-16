@@ -24,7 +24,7 @@ class Usuario {
 
     public function cargarFormulario($request){
         $this->idusuario = isset($request["id"])? $request["id"] : "";
-        $this->usuario = isset($request["txtUsuario"])? $request["txtUsuario"] : "";
+        $this->usuario = isset($request["txtusuario"])? $request["txtusuario"] : "";
         $this->clave = isset($request["txtClave"]) && $request["txtClave"] != "" ? $this->encriptarClave($request["txtClave"]) : "";
         $this->nombre = isset($request["txtNombre"])? $request["txtNombre"] : "";
         $this->apellido = isset($request["txtApellido"])? $request["txtApellido"]: "";
@@ -36,12 +36,12 @@ class Usuario {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         //Arma la query
         $sql = "INSERT INTO usuarios (
-                    usuario, 
+                    usuario,
                     clave, 
                     nombre,
                     apellido, 
                     correo
-                ) VALUES (
+                ) VALUES ( 
                     '" . $this->usuario ."', 
                     '" . $this->clave ."', 
                     '" . $this->nombre ."',
@@ -118,7 +118,7 @@ class Usuario {
     public function obtenerPorUsuario($usuario){
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "SELECT idusuario, 
-                        usuario, 
+                        usuario,
                         clave,
                         nombre,
                         apellido, 

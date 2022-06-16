@@ -109,7 +109,7 @@ class venta
     public function obtenerPorId()
     {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "SELECT idventa,
+        $sql = "SELECT idventas,
                         fk_idcliente,
                         fk_idproducto,
                         fecha,
@@ -124,7 +124,7 @@ class venta
 
         //Convierte el resultado en un array asociativo
         if ($fila = $resultado->fetch_assoc()) {
-            $this->idventa = $fila["idventas"];
+            $this->idventa = $fila["idventa"];
             $this->fk_idcliente = $fila["fk_idcliente"];
             $this->fk_idproducto = $fila["fk_idproducto"];
             if(isset($fila["fecha"])){
@@ -151,7 +151,7 @@ class venta
                     cantidad,
                     preciounitario,
                     total
-                FROM ventas";
+                FROM venta";
         if (!$resultado = $mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }

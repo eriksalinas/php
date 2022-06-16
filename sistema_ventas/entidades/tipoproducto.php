@@ -1,7 +1,7 @@
 <?php
 
 class TipoProducto {
-    private $idproducto;
+    private $idtipoproducto;
     private $nombre;
    
 
@@ -20,7 +20,7 @@ class TipoProducto {
 
 
     public function cargarFormulario($request){
-        $this->idproducto = isset($request["id"])? $request["id"] : "";
+        $this->idtipoproducto = isset($request["id"])? $request["id"] : "";
         $this->nombre = isset($request["txtnombre"])? $request["txtnomnre"] : "";
         
     }
@@ -40,7 +40,7 @@ class TipoProducto {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }
         //Obtiene el id generado por la inserción
-        $this->idtipoproducto = $mysqli->insert_id;
+        $this->idtipoProducto = $mysqli->insert_id;
         //Cierra la conexión
         $mysqli->close();
     }
