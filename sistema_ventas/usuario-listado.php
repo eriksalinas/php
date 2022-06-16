@@ -21,20 +21,20 @@ include_once("header.php");
             </div>
           <table class="table table-hover border">
             <tr>
-                <th>CUIT</th>
+                <th>Usuario</th>
                 <th>Nombre</th>
-                <th>Fecha nac.</th>
-                <th>Teléfono</th>
+                <th>Apellido</th>
                 <th>Correo</th>
                 <th>Acciones</th>
+               
             </tr>
             <?php foreach ($aUsuario as $usuario): ?>
               <tr>
-                  <td><?php echo $usuario->cuit; ?></td>
+                  <td><?php echo $usuario->usuario; ?></td>
                   <td><?php echo $usuario->nombre; ?></td>
-                  <td><?php echo date_format(date_create($usuario->fecha_nac), "d/m/Y"); ?></td>
-                  <td><?php echo $usuario->telefono; ?></td>
+                  <td><?php echo $usuario->apellido; ?></td>
                   <td><?php echo $usuario->correo; ?></td>
+                 
                   <td style="width: 110px;">
                       <a href="cliente-formulario.php?id=<?php echo $usuario->idusuario; ?>"><i class="fas fa-search"></i></a>   
                   </td>
