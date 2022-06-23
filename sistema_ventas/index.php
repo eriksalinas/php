@@ -1,5 +1,10 @@
 <?php
 
+include_once "config.php";
+include_once "entidades/venta.php";
+$pg = "Inicio";
+
+
 include_once("header.php"); 
 
 ?>
