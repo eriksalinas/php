@@ -2,7 +2,7 @@
 
 include_once "config.php";
 include_once "entidades/producto.php";
-include_once "entidades/tipoproducto.php";
+include_once "entidades/tipoproducto.php"; //Vinculamos las paginas
 
 $pg = "Edición de producto";
 
@@ -58,7 +58,7 @@ if (isset($_GET["id"]) && $_GET["id"] > 0) {
 }
 
 $tipoProducto = new Tipoproducto();
-$aTipoProductos = $tipoProducto->obtenerTodos();
+$aTipoProductos = $tipoProducto->obtenerTodos(); //Para obtener tipo producto
 
 include_once "header.php";
 ?>
