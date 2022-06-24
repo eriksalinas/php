@@ -6,6 +6,7 @@ include_once "entidades/cliente.php";
 include_once "entidades/provincia.php";
 include_once "entidades/localidad.php";
 
+
 $cliente = new Cliente();
 $cliente->cargarFormulario($_REQUEST);
 

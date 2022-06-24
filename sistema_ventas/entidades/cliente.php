@@ -1,5 +1,5 @@
 <?php
-
+//Las entidades se escriben en plural ej: Cliente y en singular en la tabla ej: clientes
 class Cliente
 {
     private $idcliente;
@@ -28,7 +28,7 @@ class Cliente
         return $this;
     }
 
-    public function cargarFormulario($request)
+    public function cargarFormulario($request) //Se acceden  a la informacion
     {
         $this->idcliente = isset($request["id"]) ? $request["id"] : "";
         $this->nombre = isset($request["txtNombre"]) ? $request["txtNombre"] : "";
@@ -43,10 +43,10 @@ class Cliente
         }
     }
 
-    public function insertar()
+    public function insertar() 
     {
         //Instancia la clase mysqli con el constructor parametrizado
-        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
+        $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT); //Conectarse a la base de datos
         //Arma la query
         $sql = "INSERT INTO clientes (
                     nombre,
@@ -67,6 +67,9 @@ class Cliente
                     $this->fk_idlocalidad,
                     '$this->domicilio'
                 );";
+                //  Se usa '´ solo para las string ej: '$this->nombre',
+                // La ultima string no lleva ,
+
         // print_r($sql);exit;
         //Ejecuta la query
         if (!$mysqli->query($sql)) {
@@ -82,7 +85,7 @@ class Cliente
     {
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "UPDATE clientes SET
+        $sql = "UPDATE clientes SET 
                 nombre = '$this->nombre',
                 cuit = '$this->cuit',
                 telefono = '$this->telefono',
@@ -110,7 +113,7 @@ class Cliente
         $mysqli->close();
     }
 
-    public function obtenerPorId()
+    public function obtenerPorId() //Se usa la Id
     {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "SELECT idcliente,
@@ -122,7 +125,7 @@ class Cliente
                         fk_idprovincia,
                         fk_idlocalidad,
                         domicilio
-                FROM clientes
+                FROM clientes 
                 WHERE idcliente = $this->idcliente";
         if (!$resultado = $mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
