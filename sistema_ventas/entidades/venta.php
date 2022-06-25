@@ -10,10 +10,13 @@ class Venta{
     private $total;
     private $fk_idproducto;
    
+    private $nombre_cliente; //nuevo
+    private $nombre_producto;
 
     public function __construct()
     {
         $this->cantidad = 0.0;
+        $this->preciounitario = 0.0; //nuevo
         $this->total = 0.0;
     }
 
@@ -31,13 +34,16 @@ class Venta{
     {
         $this->idventa = isset($request["id"]) ? $request["id"] : "";
         $this->fk_idcliente= isset($request["lstCliente"]) ? $request["ltsCliente"] : "";
-        $this->fk_idproducto= isset($request["lstProducto"]) ? $request["ltsProducto"] : "";
-        $this->cantidad = isset($request["txtCantidad"]) ? $request["txtCantidad"] : "";
-        $this->preciounitario = isset($request["txtPreciounitario"]) ? $request["txtPreciounitario"] : "";
-        $this->total = isset($request["txtTotal"]) ? $request["txtTotal"] : "";
         if (isset($request["txtAno"]) && isset($request["txtMes"]) && isset($request["txtDia"])) {
             $this->fecha= $request["txtAno"] . "-" . $request["txtMes"] . "-" . $request["txtDia"];
         }
+        $this->cantidad = isset($request["txtCantidad"]) ? $request["txtCantidad"] : "";
+        $this->preciounitario = isset($request["txtPreciounitario"]) ? $request["txtPreciounitario"] : "";
+        $this->total = isset($request["txtTotal"]) ? $request["txtTotal"] : "";
+        $this->fk_idproducto= isset($request["lstProducto"]) ? $request["ltsProducto"] : "";
+      
+       
+       
     }
 
     public function insertar() 
@@ -79,14 +85,14 @@ class Venta{
     {
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "UPDATE Ventas SET 
-                fk_idcliente = '". $this->fk_idcliente ."',
-                fecha = ". $this->fecha .",
-                cantidad = " .$this->cantidad .",
-                preciounitario =  '" .$this->preciounitario ."',
-                total=  ". $this->total .",
-                fk_idproducto =  '". $this->fk_idproducto ."',
-                WHERE idventsa = $this->idventa";
+        $sql = "UPDATE ventas SET
+                    fk_idcliente = $this->fk_idcliente,
+                    fk_idproducto = $this->fk_idproducto,
+                    fecha = '$this->fecha',
+                    cantidad = $this->cantidad,
+                    preciounitario = $this->preciounitario,
+                    total = $this->total
+                WHERE idventa = $this->idventa";
 
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -161,11 +167,16 @@ class Venta{
             while($fila = $resultado->fetch_assoc()){
                 $entidadAux = new Venta();
                 $entidadAux->idventa = $fila["idventa"];
+                if(isset($fila["fecha"])){
+                    $entidadAux->fecha = $fila["fecha"];
+                } else {
+                    $entidadAux->fecha = "";
+                }
                 $entidadAux->cantidad = $fila["cantidad"];
                 $entidadAux->preciounitario = $fila["preciounitario"];
                 $entidadAux->total = $fila["total"];
                 if(isset($fila["fecha"])){
-                    $entidadAux->fecha_nac = $fila["fecha"];
+                    $entidadAux->fecha = $fila["fecha"];
                 } else {
                     $entidadAux->fecha = "";
                 }

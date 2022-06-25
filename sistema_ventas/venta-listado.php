@@ -29,17 +29,16 @@ include_once("header.php");
                 <th>Acciones</th>
             </tr>
             <?php foreach ($aVenta as $venta): ?>
-              <tr>
-                
-                  <td><?php echo $venta->cantidad; ?></td>
-                  <td><?php echo $venta->fk_idproducto; ?></td>
-                  <td><?php echo date_format(date_create($venta->fecha), "d/m/Y"); ?></td>
-                  <td><?php echo $venta->fk_idcliente; ?></td>
-                  <td><?php echo $venta->total; ?></td>
-                  <td style="width: 110px;">
-                      <a href="venta-formulario.php"><i class="fas fa-search"></i></a>   
-                  </td>
-              </tr>
+                <tr>
+                <td><?php echo date_format(date_create($venta->fecha), "d/m/Y H:m"); ?></td>
+                <td><?php echo $venta->cantidad; ?></td>
+                <td><?php echo $venta->fk_idproducto; ?></td>
+                <td><?php echo $venta->fk_idcliente; ?></td>
+                <td><?php echo $venta->total; ?></td>
+                <td style="width: 110px;">
+                    <a href="venta-formulario.php"><i class="fas fa-search"></i></a>   
+                </td>
+            </tr>
             <?php endforeach; ?>
           </table>
         </div>
