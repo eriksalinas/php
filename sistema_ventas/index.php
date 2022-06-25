@@ -1,6 +1,9 @@
 <?php
 
 include_once("header.php"); 
+include_once("entidades/venta.php");
+$pg = "Inicio"; //Titulo de la pagina
+
 
 ?>
 

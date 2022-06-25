@@ -2,7 +2,7 @@
 
 include_once "config.php"; //vinculacion con la base de datos
 include_once "entidades/cliente.php"; //vinculacion 
-$pg = "Listado de clientes"; //Titulo de la pagina
+$pg = "Listado de cliente"; //Titulo de la pagina
 
 $cliente = new Cliente();
 $aClientes = $cliente->obtenerTodos();

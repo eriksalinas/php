@@ -22,7 +22,7 @@ include_once("header.php");
           <table class="table table-hover border">
             <tr>
                 <th>Nombre</th>
-                <th> acciones </th>
+                <th> Acciones </th>
             </tr>
             <?php foreach ($aTipoProducto as $tipoproducto): ?>
               <tr>

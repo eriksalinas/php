@@ -28,7 +28,8 @@ include_once("header.php");
                 <th>Total</th>
                 <th>Acciones</th>
             </tr>
-            <?php foreach ($aVenta as $venta): ?>
+            <!-- Se utiliza fk_.... por que en la tabla se encuentra asi-->
+            <?php foreach ($aVenta as $venta): ?> 
                 <tr>
                 <td><?php echo date_format(date_create($venta->fecha), "d/m/Y H:m"); ?></td>
                 <td><?php echo $venta->cantidad; ?></td>
