@@ -1,11 +1,11 @@
 <?php
 
 include_once "config.php"; //vinculacion con la base de datos
-include_once "entidades/cliente.php"; //vinculacion 
-$pg = "Listado de clientes"; //Titulo de la pagina
+include_once "entidades/usuario.php"; //vinculacion 
+$pg = "Listado de usuario"; //Titulo de la pagina
 
-$cliente = new Cliente();
-$aClientes = $cliente->obtenerTodos();
+$usuario = new Usuario();
+$aUsuario = $cliente->obtenerTodos();
 
 include_once("header.php"); 
 ?>
@@ -13,7 +13,7 @@ include_once("header.php");
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Listado de clientes</h1>
+          <h1 class="h3 mb-4 text-gray-800">Listado de usuarios</h1>
           <div class="row">
                 <div class="col-12 mb-3">
                     <a href="cliente-formulario.php" class="btn btn-primary mr-2">Nuevo</a>

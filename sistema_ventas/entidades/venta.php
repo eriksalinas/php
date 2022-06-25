@@ -1,7 +1,7 @@
 <?php
 //Las entidades se escriben en plural ej: Cliente y en singular en la tabla ej: clientes
-class Venta
-{
+
+class Venta{
     private $idventa;
     private $fk_idcliente;
     private $fecha;
@@ -17,8 +17,7 @@ class Venta
         $this->total = 0.0;
     }
 
-    public function __get($atributo)
-    {
+    public function __get($atributo) {
         return $this->$atributo;
     }
 
@@ -54,7 +53,7 @@ class Venta
                     total,
                     fk_idproducto
                 ) VALUES (
-                    '$this->idventa',
+                    
                     '$this->fk_idcliente',
                     '$this->fecha',
                     '$this->cantidad',
@@ -116,7 +115,7 @@ class Venta
                         preciounitario,
                         total,
                         fk_idproducto
-                FROM ventass 
+                FROM ventas
                 WHERE idventa = $this->idventa";
         if (!$resultado = $mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -128,7 +127,7 @@ class Venta
             $this->cantidad = $fila["cantidad"];
             $this->preciounitario = $fila["preciounitario"];
             $this->total = $fila["total"];
-            if(isset($fila["fecha_nac"])){
+            if(isset($fila["fecha"])){
                 $this->fecha = $fila["fecha"];
             } else {
                 $this->fecha = "";
@@ -160,7 +159,7 @@ class Venta
             //Convierte el resultado en un array asociativo
 
             while($fila = $resultado->fetch_assoc()){
-                $entidadAux = new Cliente();
+                $entidadAux = new Venta();
                 $entidadAux->idventa = $fila["idventa"];
                 $entidadAux->cantidad = $fila["cantidad"];
                 $entidadAux->preciounitario = $fila["preciounitario"];
