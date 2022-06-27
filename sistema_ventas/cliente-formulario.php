@@ -129,16 +129,7 @@ include_once("header.php");
                     <div class="row panel-body p-3">
                         <div class="col-6 form-group">
                             <label for="txtTelefono">Provincia:</label>
-                            <select class="form-control" name="lstProvincia" id="lstProvincia" onchange="fBuscarLocalidad()" required>
-                                <option value="" disabled selected>Seleccionar</option>
-                                <?php foreach($aProvincias as $provincia): ?>
-                                    <?php if($cliente->fk_idprovincia == $provincia->idprovincia): ?>
-                                        <option selected value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
-                                    <?php else: ?>
-                                        <option value="<?php echo $provincia->idprovincia; ?>"><?php echo $provincia->nombre; ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </select>
+                           
                         </div>
                         <div class="col-6 form-group">
                             <label for="txtTelefono">Localidad:</label>

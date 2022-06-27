@@ -3,7 +3,6 @@
 include_once "config.php";
 include_once "entidades/producto.php";
 
-
 $pg = "Edición de producto";
 
 
@@ -86,28 +85,27 @@ include_once("header.php");
             <input type="text" required class="form-control" name="txtPrecio" id="txtPrecio" value="<?php echo $producto->precio ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
         </div>
         <div class="col-12 form-group">
-            <label for="txtCorreo">Descripción:</label>
-            <textarea type="text" name="txtDescripcion" id="txtDescripcion"><?php echo $producto->descripcion; ?></textarea>
-        </div>
+                    <label for="txtCorreo">Descripción:</label>
+                    <textarea type="text" name="txtDescripcion" id="txtDescripcion"><?php echo $producto->descripcion; ?></textarea>
+                </div>
         <div class="col-6 form-group">
             <label for="fileImagen">Imagen:</label>
             <input type="file" class="form-control-file" name="imagen" id="imagen">
             <img src="files/<?php echo $producto->imagen; ?>" class="img-thumbnail">
         </div>
     </div>
-
+   
 </div>
-<!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 
 
 <!-- End of Main Content -->
-
-<script> //Seutiliza este scrip para darle estilo al cuadro de la descripcion
-    ClassicEditor
-        .create(document.querySelector('#txtDescripcion'))
-        .catch(error => {
-            console.error(error);
-        });
-</script>
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#txtDescripcion' ) )
+            .catch( error => {
+            console.error( error );
+            } );
+        </script>
 
 <?php include_once("footer.php"); ?>

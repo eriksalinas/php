@@ -2,6 +2,7 @@
 
 include_once "config.php"; //vinculacion con la base de datos
 include_once "entidades/producto.php"; //vinculacion 
+
 $pg = "Listado de productos"; //Titulo de la pagina
 
 $producto = new Producto();
@@ -16,7 +17,7 @@ include_once("header.php");
           <h1 class="h3 mb-4 text-gray-800">Listado de productos</h1>
           <div class="row">
                 <div class="col-12 mb-3">
-                    <a href="cliente-formulario.php" class="btn btn-primary mr-2">Nuevo</a>
+                    <a href="producto-formulario.php" class="btn btn-primary mr-2">Nuevo</a>
                 </div>
             </div>
           <table class="table table-hover border">
