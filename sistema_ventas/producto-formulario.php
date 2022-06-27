@@ -2,6 +2,7 @@
 
 include_once "config.php";
 include_once "entidades/producto.php";
+include_once "entidades/tipoproducto.php"; //Se utiliza para vincular y obtener datos
 
 
 $pg = "Edición de producto";

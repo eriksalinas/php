@@ -27,7 +27,7 @@ if ($_POST) {
         
     }
 }
-if (isset($GET["id"])&& $_GET["id"] > 0){
+if (isset($_GET["id"]) && $_GET["id"] > 0){
     $tipoProducto->obtenerPorId(); //Se utiliza para que aparescan los datos en la web 
  
 }
