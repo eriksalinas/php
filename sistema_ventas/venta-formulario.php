@@ -62,6 +62,14 @@ include_once("header.php");
             <label for="txtNombre">Nombre:</label>
             <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $venta->nombre ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
         </div>
+        <div class="col-6 form-group">
+            <label for="txtNombre">Nombre:</label>
+            <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $venta->nombre ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
+        </div>
+        <div class="col-6 form-group">
+            <label for="txtNombre">Nombre:</label>
+            <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $venta->nombre ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
+        </div>
     </div>
 
     <!-- /.container-fluid -->
