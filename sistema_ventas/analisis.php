@@ -2,6 +2,8 @@
 
 include_once "config.php";
 include_once "entidades/producto.php";
+include_once "entidades/tipoproducto.php"; //Se utiliza para vincular y obtener datos
+
 
 $pg = "Edición de producto";
 
@@ -31,6 +33,8 @@ if (isset($GET["id"]) && $_GET["id"] > 0) {
     $producto->obtenerPorId(); //Se utiliza para que aparescan los datos en la web // Consulta con profe
 }
 
+$tipoProducto = new TipoProducto(); //Se utiliza para mostrar datos cuando es una opcion desplegable
+$aTipoProductos = $tipoProducto->obtenerTodos();
 
 include_once("header.php");
 ?>
@@ -62,19 +66,19 @@ include_once("header.php");
             <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $producto->nombre ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
         </div>
         <div class="col-6 form-group">
-            <label for="ltsNombre">Tipo de productos:</label>
-            <select class="form-control selectpicker" name="lstproducto" id="lstProducto" data-live-search="true" required>
-                <!-- selectpicker se utiliza para abrir las opciones y data-live-search="true" Se utiliza para ver si es verdadedo y para mostrar las opciones -->
-                <option value="" disabled selected>Seleccionar</option>
-                <?php foreach ($aTipoproducto as $tipoproducto) : ?>
-                    <?php if ($producto->fk_idtipoproducto == $tipoproducto->idtipoproducto) : ?>
-                        <option selected value="<?php echo $producto->idtipoproducto; ?>"><?php echo $producto->nombre; ?></option>
-                    <?php else : ?>
-                        <option value="<?php echo $tipoproducto->idtipoproducto; ?>"><?php echo $tipoproducto->nombre; ?></option>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </select>
-
+            <div class="col-12 form-group">
+                <label for="txtNombre">Tipo de producto:</label>
+                <select class="form-control" name="lstTipoproducto" id="lstTipoProducto" data-live-search="true" required>
+                    <option value="" disabled selected>Seleccionar</option>
+                    <?php foreach ($aTipoProductos as $tipo) : ?>
+                        <?php if ($producto->fk_idtipoproducto == $tipo->idtipoproducto) : ?>
+                            <option selected value="<?php echo $tipo->idtipoproducto; ?>"><?php echo $tipo->nombre; ?></option>
+                        <?php else : ?>
+                            <option value="<?php echo $tipo->idtipoproducto; ?>"><?php echo $tipo->nombre; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
         <div class="col-6 form-group">
             <label for="txtCantidad">Cantidad:</label>
@@ -85,27 +89,29 @@ include_once("header.php");
             <input type="text" required class="form-control" name="txtPrecio" id="txtPrecio" value="<?php echo $producto->precio ?>"> <!-- Se utiliza eco para mostar datos en pantalla -->
         </div>
         <div class="col-12 form-group">
-                    <label for="txtCorreo">Descripción:</label>
-                    <textarea type="text" name="txtDescripcion" id="txtDescripcion"><?php echo $producto->descripcion; ?></textarea>
-                </div>
+            <label for="txtCorreo">Descripción:</label>
+            <textarea type="text" name="txtDescripcion" id="txtDescripcion"><?php echo $producto->descripcion; ?></textarea>
+        </div>
         <div class="col-6 form-group">
             <label for="fileImagen">Imagen:</label>
             <input type="file" class="form-control-file" name="imagen" id="imagen">
             <img src="files/<?php echo $producto->imagen; ?>" class="img-thumbnail">
         </div>
     </div>
-   
+
 </div>
-    <!-- /.container-fluid -->
+<!-- /.container-fluid -->
 
 
 <!-- End of Main Content -->
+
 <script>
-        ClassicEditor
-            .create( document.querySelector( '#txtDescripcion' ) )
-            .catch( error => {
-            console.error( error );
-            } );
-        </script>
+    //Seutiliza este scrip para darle estilo al cuadro de la descripcion
+    ClassicEditor
+        .create(document.querySelector('#txtDescripcion'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 <?php include_once("footer.php"); ?>

@@ -4,6 +4,9 @@ include_once("header.php");
 include_once("entidades/venta.php");
 $pg = "Inicio"; //Titulo de la pagina
 
+$venta = new Venta();
+$facturacionMes = $venta->obtenerFacturacionMensual(date('m'));
+$facturacionAnual = $venta->obtenerFacturacionAnual(date('Y'));
 
 ?>
 

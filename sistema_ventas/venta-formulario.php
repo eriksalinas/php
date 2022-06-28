@@ -17,9 +17,9 @@ if($_POST){
               $venta->actualizar();
         } else {
             //Es nuevo
-            $producto = new Producto();
-            $producto->idproducto = $venta->fk_idproducto;
-            $producto->obtenerPorId();
+            $venta = new Venta();
+            $venta->idventa = $venta->fk_idproducto;
+            $venta->obtenerPorId();
             if($venta->cantidad <= $producto->cantidad){
                 $total = $venta->cantidad * $producto->precio;
                 $venta->total = $total;
