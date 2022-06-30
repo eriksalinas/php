@@ -12,54 +12,59 @@ $producto->cargarFormulario($_REQUEST);
 //Agregar y almacenar una imagen
 if ($_POST) {
     if (isset($_POST["btnGuardar"])) {
+
+        //Busco el producto que esta en la base de datos, para extraer el nombre anterior de la imagen
         if (isset($_GET["id"]) && $_GET["id"] > 0) {
 
-              $productoAux = new Producto();
-              $productoAux->idproducto = $_GET['id'];
-              $productoAux->obtenerPorId();
+            $productoAux = new Producto();
+            $productoAux->idproducto = $_GET['id']; //AGREGAR IMAGEN
+            $productoAux->obtenerPorId();
+
 
             if ($_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
                 if (file_exists("file/" . $productoAux->imagen)) {
                     unlink("file/" . $productoAux->imagen);
                 }
-
-                $nombreRandom = date("Ymdhmsi") . rand(1000,2000);
+                $nombreRandom = date("Ymdhmsi") . rand(1000, 2000);
                 $extension = pathinfo($_FILES['imagen']["name"], PATHINFO_EXTENSION);
                 $archivoTmp = $_FILES["imagen"]["tmp_name"];
                 $nombreImagen = $producto->imagen = "$nombreRandom.$extension";
-                if($extension == "jpg" || $extension == "jpeg" || $extension == "png"){
+                if ($extension == "jpg" || $extension == "jpeg" || $extension == "png") {
                     move_uploaded_file($archivoTmp, "files/$nombreImagen");
                     $producto->imagen = "$nombreRandom.$extension";
-                } 
+                }
             } else {
-               
+
                 $producto->imagen = $productoAux->imagen;
             }
 
             //Actualizo un cliente existente
             $producto->actualizar();
-        }
-
-        //Almacenamos la imagen en el servidor
-        else {
+        } else { //Almacenamos la imagen en el servidor
+            
             if ($_FILES["imagen"]["error"] === UPLOAD_ERR_OK) {
-                $nombreRandom = date("Ymdhmsi") . rand(1000,2000);
+                $nombreRandom = date("Ymdhmsi") . rand(1000, 2000);
                 $archivoTmp = $_FILES["imagen"]["tmp_name"];
                 $extension = pathinfo($_FILES['imagen']["name"], PATHINFO_EXTENSION);
-                if($extension == "jpg" || $extension == "jpeg" || $extension == "png"){
+                if ($extension == "jpg" || $extension == "jpeg" || $extension == "png") {
                     move_uploaded_file($archivoTmp, "files/$nombreImagen");
                     $producto->imagen = "$nombreRandom.$extension";
-                } 
+                }
             }
             //print_r($producto); exit;
             //Es nuevo
             $producto->insertar();
         }
-
-
         $msg["texto"] = "Guardado correctamente";
         $msg["codigo"] = "alert-success";
+
     } else if (isset($_POST["btnBorrar"])) {
+        $productoAux = new Producto();
+        $productoAux->idproducto = $_GET['id'];
+        $productoAux->obtenerPorId();
+        if (file_exists("file/" . $productoAux->imagen)) {  //BORRAR IMAGEN
+            unlink("file/" . $productoAux->imagen);
+        }
         $producto->eliminar();
         header("Location: producto-listado.php");
     }

@@ -3,16 +3,29 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
+//session_start();
 
+include_once ("entidades/usuario.php");
+include_once("config.php");
+
+//ESTE if nos permite agregar contraseña, usaurio y nombre
 if($_POST){
     $usuario = trim($_REQUEST["txtUsuario"]);
     $clave = trim($_REQUEST["txtClave"]);
 
-    if($usuario == "admin" && $clave == "admin123"){
-        $_SESSION["nombre"] = "Nelson";
+    //Buscamos en la base de datos si existe el usuario que ingreó la persona
+    //obtener por usuario
+    $entidadUsuario = new Usuario();
+    $entidadUsuario->obtenerPorUsuario($usuario);
+
+    //Si existe con ese nombre y la clave se verifica en la de usuario de la BBDD
+    if( $entidadUsuario->usuario !="" && password_verify($clave, $entidadUsuario->clave)){
+        //Crear una variable de session con tu nombre
+        $_SESSION["nombre"] = $entidadUsuario->nombre;
         header("Location: index.php");
+        //Redireccionar index
     } else {
+        //sino "Usuario o clave incorrecta"
         $msg = "Usuario o clave incorrecto";
     }
 }

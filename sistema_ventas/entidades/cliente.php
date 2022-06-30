@@ -58,7 +58,7 @@ class Cliente
                     fk_idlocalidad,
                     domicilio
                 ) VALUES (
-                    '$this->nombre',
+                    .$this->nombre',
                     '$this->cuit',
                     '$this->telefono',
                     '$this->correo',

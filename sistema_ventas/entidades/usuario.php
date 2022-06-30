@@ -70,9 +70,10 @@ class Usuario {
             $sql .= "clave = '$this->clave',";
         }
 
+       
         $sql .= "correo = '$this->correo'
                 WHERE idusuario = " . $this->idusuario;
-          
+                
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }
@@ -164,7 +165,7 @@ class Usuario {
         }
         return $aResultado;
     }
-
+     //Meto para incriptar clave (contraseña)
     public function encriptarClave($clave){
         $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
         return $claveEncriptada;
