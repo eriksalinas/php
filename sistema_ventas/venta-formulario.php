@@ -164,50 +164,5 @@ include_once("header.php");
 
       </div>
       <!-- End of Main Content -->
-<script>
 
-function fBuscarPrecio(){
-    let idProducto = $("#lstProducto option:selected").val();
-      $.ajax({
-            type: "GET",
-            url: "venta-formulario.php?do=buscarProducto",
-            data: { id:idProducto },
-            async: true,
-            dataType: "json",
-            success: function (respuesta) {
-                strResultado = Intl.NumberFormat("es-AR", {style: 'currency', currency: 'ARS'}).format(respuesta.precio);
-                $("#txtPrecioUniCurrency").val(strResultado);
-                $("#txtPrecioUni").val(respuesta.precio);
-            }
-        });
-
-}
-
-function fCalcularTotal(){
-    var idProducto = $("#lstProducto option:selected").val();
-    var precio = parseFloat($('#txtPrecioUni').val());
-    var cantidad = parseInt($('#txtCantidad').val());
-
-     $.ajax({
-        type: "GET",
-        url: "venta-formulario.php?do=buscarProducto",
-        data: { id:idProducto },
-        async: true,
-        dataType: "json",
-        success: function (respuesta) {
-            let resultado = 0;
-            if(cantidad <= parseInt(respuesta.cantidad)){
-                resultado = precio * cantidad;
-                 $("#msgStock").hide();
-            } else {
-                $("#msgStock").show();
-            }
-            strResultado = Intl.NumberFormat("es-AR", {style: 'currency', currency: 'ARS'}).format(resultado);
-            $("#txtTotal").val(strResultado);
-        }
-    });   
-}
-
-
-</script>
 <?php include_once("footer.php"); ?>

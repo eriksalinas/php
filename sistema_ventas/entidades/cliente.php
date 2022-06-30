@@ -86,15 +86,15 @@ class Cliente
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "UPDATE clientes SET 
-                nombre = '$this->nombre',
-                cuit = '$this->cuit',
-                telefono = '$this->telefono',
-                correo = '$this->correo',
-                fecha_nac =  '$this->fecha_nac',
-                fk_idprovincia =  '$this->fk_idprovincia',
-                fk_idlocalidad =  '$this->fk_idlocalidad',
-                domicilio =  '$this->domicilio'
-                WHERE idcliente = $this->idcliente";
+                nombre = '".$this->nombre."',
+                cuit = '".$this->cuit."',
+                telefono = '".$this->telefono."',
+                correo = '".$this->correo."',
+                fecha_nac =  '".$this->fecha_nac."',
+                fk_idprovincia =  '".$this->fk_idprovincia."',
+                fk_idlocalidad =  '".$this->fk_idlocalidad."',
+                domicilio =  '".$this->domicilio."'
+                WHERE idcliente = ".$this->idcliente;
 
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -105,7 +105,7 @@ class Cliente
     public function eliminar()
     {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "DELETE FROM clientes WHERE idcliente = " . $this->idcliente;
+        $sql = "DELETE FROM clientes WHERE idcliente = ". $this->idcliente;
         //Ejecuta la query
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -127,6 +127,8 @@ class Cliente
                         domicilio
                 FROM clientes 
                 WHERE idcliente = $this->idcliente";
+               // print_r($sql);
+                // exit;
         if (!$resultado = $mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }

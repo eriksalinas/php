@@ -6,7 +6,7 @@ $pg = "Inicio"; //Titulo de la pagina
 
 $venta = new Venta();
 $facturacionMes = $venta->obtenerFacturacionMensual(date('m'));
-$facturacionAnual = $venta->obtenerFacturacionAnual(date('Y'));
+$facturacionAnual =$venta->obtenerFacturacionAnual(date('Y'));
 
 ?>
 

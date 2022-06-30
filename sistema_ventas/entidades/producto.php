@@ -66,13 +66,13 @@ class Producto {
 
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
         $sql = "UPDATE productos SET
-                nombre = '$this->nombre',
-                fk_idtipoproducto = $this->fk_idtipoproducto,
-                cantidad = $this->cantidad,
-                precio = $this->precio,
-                descripcion = '$this->descripcion,
-                imagen = '$this->imagen'
-                WHERE idproducto = $this->idproducto";
+                nombre = '".$this->nombre ."',
+                fk_idtipoproducto = '".$this->fk_idtipoproducto."',
+                cantidad = '".$this->cantidad."',
+                precio = '".$this->precio."',
+                descripcion = '".$this->descripcion."',
+                imagen = '".$this->imagen."'
+                WHERE idproducto = ".$this->idproducto;
           
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
@@ -84,7 +84,7 @@ class Producto {
     public function eliminar()
     {
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE, Config::BBDD_PORT);
-        $sql = "DELETE FROM productos WHERE idproducto = " . $this->idproducto;
+        $sql = " DELETE FROM productos WHERE idproducto = " . $this->idproducto;
         //Ejecuta la query
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
