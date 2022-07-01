@@ -33,14 +33,14 @@ class Venta{
     public function cargarFormulario($request) //Se acceden  a la informacion
     {
         $this->idventa = isset($request["id"]) ? $request["id"] : "";
-        $this->fk_idcliente= isset($request["txtCliente"]) ? $request["txtCliente"] : "";
-        if (isset($request["txtAno"]) && isset($request["txtMes"]) && isset($request["txtDia"])) {
-            $this->fecha= $request["txtAno"] . "-" . $request["txtMes"] . "-" . $request["txtDia"];
+        $this->fk_idcliente= isset($request["lstCliente"]) ? $request["lstCliente"] : "";
+        if (isset($request["txtAnio"]) && isset($request["txtMes"]) && isset($request["txtDia"])) {
+            $this->fecha= $request["txtAnio"] . "-" . $request["txtMes"] . "-" . $request["txtDia"];
         }
         $this->cantidad = isset($request["txtCantidad"]) ? $request["txtCantidad"] : "";
         $this->preciounitario = isset($request["txtPreciounitario"]) ? $request["txtPreciounitario"] : "";
         $this->total = isset($request["txtTotal"]) ? $request["txtTotal"] : "";
-        $this->fk_idproducto= isset($request["txtProducto"]) ? $request["txtProducto"] : "";
+        $this->fk_idproducto= isset($request["lstProducto"]) ? $request["lstProducto"] : "";
       
        
        
@@ -93,7 +93,7 @@ class Venta{
                     preciounitario = $this->preciounitario,
                     total = $this->total
                 WHERE idventa = $this->idventa";
-
+               
         if (!$mysqli->query($sql)) {
             printf("Error en query: %s\n", $mysqli->error . " " . $sql);
         }

@@ -146,8 +146,8 @@ include_once("header.php");
                 </div>
                 <div class="col-6 form-group">
                     <label for="txtPrecioUni">Precio unitario:</label>
-                    <input type="text" class="form-control" id="txtPrecioUniCurrency" value="$ <?php echo $venta->preciounitario; ?>" disabled>
-                    <input type="hidden" class="form-control" name="txtPrecioUni" id="txtPrecioUni" value="<?php echo $venta->preciounitario; ?>">
+                   
+                    <input type="text" class="form-control" name="txtPreciounitario" id="txtPrecioUni" value="<?php echo $venta->preciounitario; ?>">
                 </div>
                 <div class="col-6 form-group">
                     <label for="txtCantidad">Cantidad:</label>
