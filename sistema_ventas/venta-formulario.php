@@ -50,7 +50,7 @@ if(isset($_GET["do"]) && $_GET["do"] == "buscarProducto"){
     $aResultado["precio"] = $producto->precio;
     $aResultado["cantidad"] = $producto->cantidad;
     echo json_encode($aResultado);
-    exit;
+    
 }
 
 $cliente = new Cliente();
