@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>multiplos</title>
+</head>
+<body>
+    <script>
+          aNumeros = new Array (10,14,21,42,7,35,42,100);
+
+          document.write("PASO A:<br>");
+          aNumeros.forEach(function (value, index) {
+            if(value % 7 == 0){
+                document.write(value + "<br>"); 
+            }
+          });
+
+          document.write("<br>PASO B:<br>");
+          function imprimirListado(aValores){
+            aValores.forEach(function(valor){
+                document.write(valor + "<br>");
+            });
+          }
+
+          imprimirListado(aNumeros);
+
+
+          document.write("<br>PASO C:<br>");
+          aResultado = aNumeros.filter(function (valor){
+            return(valor %7 == 0);
+          });
+
+          imprimirListado(aResultado);
+
+          document.write("<br>PASO D:<br>");
+          aResultado = aNumeros.map(function(valor){
+
+            return Math.sqrt
+          });   
+            imprimirListado(aResultado);
+        </script>
+    
+</body>
+</html>
